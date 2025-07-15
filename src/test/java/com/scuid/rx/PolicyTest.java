@@ -5,14 +5,14 @@ import org.junit.Test;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Module;
-import com.alchemain.rx.delegates.person.EvaluatePolicy;
+import com.alchemain.rx.delegates.NoOp;
 import com.alchemain.rx.init.GuiceFactory;
 import com.alchemain.rx.init.MongoModule;
 import com.alchemain.rx.init.ReactorModule;
 import com.alchemain.rx.internal.ReactorCore;
 import com.alchemain.rx.messages.ExecutionContext;
-import com.scuid.commons.json.JsonFiles;
-import com.scuid.commons.json.JsonProvider;
+import com.alchemain.rx.bus.JsonProvider;
+import com.alchemain.rx.bus.JsonFiles;
 
 public class PolicyTest {
 	@Test
@@ -30,7 +30,7 @@ public class PolicyTest {
 		data.put("type", "CREATE");
 		data.put("entity", person);
 
-		String id = core.ask(ctx, EvaluatePolicy.class, data);
+		String id = core.ask(ctx, NoOp.class, data);
 		System.out.println("job id: " + id);
 
 		Thread.sleep(1000 * 5);
